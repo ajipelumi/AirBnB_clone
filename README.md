@@ -16,6 +16,7 @@ The web application will be composed of:
 
 ## Command Interpreter
 Our command interpreter is the first part of the AirBnB clone. It is like a shell and it will help us manage objects.
+
 Our shell would work like this in interactive mode:
 ```bash
 $ ./console.py
