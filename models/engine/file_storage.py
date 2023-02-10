@@ -55,6 +55,9 @@ class FileStorage():
         # import BaseModel for eval() call
         from models.base_model import BaseModel
 
+        # import User for eval() call
+        from models.user import User
+
         # Check if file exists
         file_exists = os.path.exists(self.__file_path)
 

@@ -3,6 +3,7 @@
 import cmd
 import sys
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 
 
@@ -15,6 +16,7 @@ class HBNBCommand(cmd.Cmd):
     # Create dictionary to store class names
     class_names = {
             "BaseModel": BaseModel,
+            "User": User,
     }
 
     def emptyline(self):
