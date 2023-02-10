@@ -36,8 +36,8 @@ class FileStorage():
         # Iterate through items
         for key, value in self.__objects.items():
 
-            # value is a BaseModel object as seen in new().
-            # A call to to_dict will return a dict object
+            # value is an object as seen in new().
+            # a call to to_dict will return a dict object
             # which makes it serializable
             obj_json.update({key: value.to_dict()})
 

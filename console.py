@@ -177,6 +177,78 @@ class HBNBCommand(cmd.Cmd):
 
                 print(all_instance)  # Print list
 
+    def do_update(self, arg):
+        """
+        Updates an instance based on the class name and id by
+        adding or updating attribute (save the change into the JSON file).
+        syntax: update <class name> <id> <attribute name> "<attribute value>"
+        """
+        # Split into arguments
+        args = arg.split()
+
+        # If class name is missing
+        if len(args) == 0:
+            print("** class name missing **")
+
+        # If class name does not exist
+        elif args[0] not in self.class_names:
+            print("** class doesn't exist **")
+
+        # If id is missing
+        elif len(args) == 1:
+            print("** instance id missing **")
+
+        else:
+            key = f'{args[0]}.{args[1]}'  # Store key to access obj_to_update
+            obj = storage.all()  # Load all objects into memory
+            obj_to_update = ""
+
+            # Iterate through objects
+            for obj_id in obj.keys():
+
+                # If key is found
+                if obj_id == key:
+                    obj_to_update = obj[key]  # Get obj_to_update
+
+            # If instance of class name to be updated is not found
+            if not obj_to_update:
+                print("** no instance found **")
+
+            # If attribute name is missing
+            elif len(args) == 2:
+                print("** attribute name missing **")
+
+            # If attribute value is missing
+            elif len(args) == 3:
+                print("** value missing **")
+
+            # All arguments passed
+            else:
+
+                # Cast attribute value to type
+                try:
+
+                    # Check if value is an int
+                    attr_value = int(args[3])
+
+                except ValueError:
+
+                    try:
+
+                        # Check if value is a float
+                        attr_value = float(args[3])
+
+                    except ValueError:
+
+                        # Value can only be a string
+                        attr_value = args[3].strip("'\"")
+
+                # Add or Update item in object
+                setattr(obj_to_update, args[2], attr_value)
+
+                # Save change to JSON file
+                obj_to_update.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
