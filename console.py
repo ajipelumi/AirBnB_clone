@@ -94,6 +94,89 @@ class HBNBCommand(cmd.Cmd):
             if not value:
                 print("** no instance found **")
 
+    def do_destroy(self, arg):
+        """
+        Deletes an instance
+        syntax: destroy <class name> <id>
+        """
+        # Split into arguments
+        args = arg.split()
+
+        # If class name is missing
+        if len(args) == 0:
+            print("** class name missing **")
+
+        # If class name does not exist
+        elif args[0] not in self.class_names:
+            print("** class doesn't exist **")
+
+        # If id is missing
+        elif len(args) == 1:
+            print("** instance id missing **")
+
+        else:
+            key = f'{args[0]}.{args[1]}'  # Store key to access value
+            obj = storage.all()  # Load all objects into memory
+            flag = 0  # Tracks item deletion
+            key_to_delete = ""
+
+            # Iterate through objects
+            for obj_id in obj.keys():
+
+                # If key is found
+                if obj_id == key:
+                    key_to_delete = key  # Store the key
+
+            # Check for key_to_delete
+            if key_to_delete:
+                del obj[key_to_delete]
+                flag = 1  # Indicates that item has been deleted
+
+            # The instance does not exist as key is not found
+            if flag == 0:
+                print("** no instance found **")
+
+    def do_all(self, arg):
+        """
+        Prints all string representation of all instances
+        based or not on the class name.
+        syntax: all <class name> or all
+        """
+        # If class name does not exist
+        if arg and arg not in self.class_names:
+            print("** class doesn't exist **")
+
+        else:
+            all_instance = []  # List to store instance
+            all_objs = storage.all()  # Get the instances
+
+            # If no class name
+            if not arg:
+
+                # Iterate through objects
+                for key in all_objs.keys():
+
+                    # Append each instance to list (cast as string)
+                    all_instance.append(str(all_objs[key]))
+
+                print(all_instance)  # Print list
+
+            # Valid class name is entered
+            if arg and arg in self.class_names:
+
+                # Iterate through objects
+                for key in all_objs.keys():
+
+                    obj = all_objs[key]  # Get instance
+
+                    # Check if instance class name is argument passed
+                    if obj.__class__.__name__ == arg:
+
+                        # Append each instance to list (cast as string)
+                        all_instance.append(str(obj))
+
+                print(all_instance)  # Print list
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
