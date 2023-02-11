@@ -11,6 +11,7 @@ class TestBaseModelClass(unittest.TestCase):
     def setUp(self):
         """ Sets up objects and variables. """
         self.obj = BaseModel()
+        self.obj1 = BaseModel()
 
     def test_create_instance(self):
         """ Test that BaseModel instance is created. """
@@ -31,7 +32,7 @@ class TestBaseModelClass(unittest.TestCase):
 
     def test_basemodel_id(self):
         """ Test BaseModel id. """
-        self.assertTrue(self.obj.id)
+        self.assertNotEqual(self.obj.id, self.obj1.id)
 
     def test_basemodel_datetime(self):
         """ Test the datetime an instance is created. """
@@ -50,6 +51,13 @@ class TestBaseModelClass(unittest.TestCase):
         obj_dict = self.obj.__dict__
         exp_string = f"[{cls_name}] ({obj_id}) {obj_dict}"
         self.assertEqual(self.obj.__str__(), exp_string)
+
+    def test_dict_item(self):
+        """ Test that the right variables are in dictionary. """
+        self.assertTrue("__class__" in self.obj.to_dict())
+        self.assertTrue("id" in self.obj.to_dict())
+        self.assertTrue("created_at" in self.obj.to_dict())
+        self.assertTrue("updated_at" in self.obj.to_dict())
 
     def test_to_dict(self):
         """ Test that to_dict returns all keys/values of __dict__. """
@@ -77,6 +85,7 @@ class TestBaseModelClass(unittest.TestCase):
         self.obj.number = 89
         json_dict = self.obj.to_dict()
         new_model = BaseModel(**json_dict)
+        self.assertEqual(type(new_model), type(self.obj))
         self.assertEqual(new_model.id, self.obj.id)
         self.assertEqual(new_model.name, self.obj.name)
         self.assertEqual(new_model.number, self.obj.number)
