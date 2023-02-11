@@ -52,11 +52,26 @@ class FileStorage():
         Deserializes the JSON file to __objects (only if
         the JSON file (__file_path) exists.
         """
-        # import BaseModel for eval() call
+        # Import BaseModel for eval() call
         from models.base_model import BaseModel
 
-        # import User for eval() call
+        # Import User for eval() call
         from models.user import User
+
+        # Import State for eval() call
+        from models.state import State
+
+        # Import City for eval() call
+        from models.city import City
+
+        # Import Place for eval() call
+        from models.place import Place
+
+        # Import Amenity for eval() call
+        from models.amenity import Amenity
+
+        # Import Review for eval() call
+        from models.review import Review
 
         # Check if file exists
         file_exists = os.path.exists(self.__file_path)

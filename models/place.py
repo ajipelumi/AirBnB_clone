@@ -34,7 +34,7 @@ class Place(BaseModel):
     latitude = 0.0
 
     # Longitude attribute
-    longitude 0.0
+    longitude = 0.0
 
     # Amenity attribute. It will be the list of Amenity.id
     amenity_ids = []
