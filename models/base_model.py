@@ -38,7 +38,7 @@ class BaseModel():
             self.created_at = datetime.datetime.now()
 
             # The current datetime when an instance is updated
-            self.updated_at = datetime.datetime.now()
+            self.updated_at = self.created_at
 
             # Call method new() on storage
             storage.new(self)
