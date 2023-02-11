@@ -35,13 +35,21 @@ class TestBaseModelClass(unittest.TestCase):
 
     def test_basemodel_datetime(self):
         """ Test the datetime an instance is created. """
-        self.assertTrue(self.obj.created_at)
-        self.assertTrue(self.obj.updated_at)
+        self.assertEqual(type(self.obj.created_at), datetime.datetime)
+        self.assertEqual(type(self.obj.updated_at), datetime.datetime)
 
     def test_save(self):
         """ Test the save method. """
         old_time = self.obj.updated_at
         self.assertNotEqual(self.obj.save(), old_time)
+
+    def test_str(self):
+        """ Test string representation. """
+        cls_name = self.obj.__class__.__name__
+        obj_id = self.obj.id
+        obj_dict = self.obj.__dict__
+        exp_string = f"[{cls_name}] ({obj_id}) {obj_dict}"
+        self.assertEqual(self.obj.__str__(), exp_string)
 
     def test_to_dict(self):
         """ Test that to_dict returns all keys/values of __dict__. """

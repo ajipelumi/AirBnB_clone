@@ -48,6 +48,7 @@ class HBNBCommand(cmd.Cmd):
         End-of-file (EOF) command.
         Press Ctrl-D to signal EOF/
         """
+        print()  # Print newline
         return True
 
     def do_create(self, arg):

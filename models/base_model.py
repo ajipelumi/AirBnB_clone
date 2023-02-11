@@ -19,11 +19,7 @@ class BaseModel():
                     continue
 
                 # Check for created_at and updated_at
-                if key == "created_at":
-                    # Convert to datetime object
-                    value = datetime.datetime.fromisoformat(value)
-
-                if key == "updated_at":
+                if key in ["created_at", "updated_at"]:
                     # Convert to datetime object
                     value = datetime.datetime.fromisoformat(value)
 
