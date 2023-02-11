@@ -42,3 +42,12 @@ EOF  help  quit
 (hbnb) 
 $
 ```
+
+## Files and Directories
+- `models` directory contains all classes used for the entire project.
+- `tests` directory contains all unit tests.
+- `console.py` file is the entry point of our command interpreter.
+- `models/base_model.py` file is the base class of all our models. It contains common elements:
+  - attributes: `id`, `created_at` and `updated_at`
+  - methods: `save()` and `to_dict()`
+- `models/engine` directory contains all storage classes.
