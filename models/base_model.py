@@ -35,10 +35,7 @@ class BaseModel():
             self.id = str(uuid.uuid4())
 
             # The current datetime when an instance is created
-            self.created_at = datetime.datetime.now()
-
-            # The current datetime when an instance is updated
-            self.updated_at = self.created_at
+            self.created_at = self.updated_at = datetime.datetime.now()
 
             # Call method new() on storage
             storage.new(self)
