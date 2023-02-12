@@ -10,6 +10,7 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 from models import storage
+import re
 
 
 class HBNBCommand(cmd.Cmd):
@@ -28,6 +29,47 @@ class HBNBCommand(cmd.Cmd):
             "Amenity": Amenity,
             "Review": Review
     }
+
+    def default(self, arg):
+        """
+        Handles an alternate syntax <class name>.<command>.
+        """
+        # Dictionary to hold commands
+        commands = {
+                "all": self.do_all,
+        }
+
+        # Check if the first arg is an uppercase character
+        # This would mean that an alternate syntax was called
+        if arg[0].isupper():
+
+            # Replace the characters with space
+            new_arg = re.sub(r'[,\.\(\)\'\"]', " ", arg)
+
+            # Split new_arguments and turn to list
+            new_arg = new_arg.split()
+
+            # Swap the first and second arguments to match required syntax
+            new_arg[0], new_arg[1] = new_arg[1], new_arg[0]
+
+            # Check if command is in list of commands
+            if new_arg[0] in commands:
+
+                # Store command
+                com = new_arg[0]
+
+                # Pop the command from list
+                new_arg.pop(0)
+
+                # Join arguments as str to pass to command
+                new_arg = " ".join(new_arg)
+
+                # Call command with correct syntax
+                return commands[com](new_arg)
+
+        # Call parent default if the right syntex was called
+        # Or if new_arg[0] is not in commands
+        return cmd.Cmd.default(self, arg)
 
     def emptyline(self):
         """
