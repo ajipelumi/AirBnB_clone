@@ -37,6 +37,7 @@ class HBNBCommand(cmd.Cmd):
         # Dictionary to hold commands
         commands = {
                 "all": self.do_all,
+                "count": self.do_count
         }
 
         # Check if the first arg is an uppercase character
@@ -61,7 +62,7 @@ class HBNBCommand(cmd.Cmd):
                 # Pop the command from list
                 new_arg.pop(0)
 
-                # Join arguments as str to pass to command
+                # Join arguments as string to pass to command
                 new_arg = " ".join(new_arg)
 
                 # Call command with correct syntax
@@ -303,6 +304,29 @@ class HBNBCommand(cmd.Cmd):
 
                 # Save change to JSON file
                 obj_to_update.save()
+
+    def do_count(self, arg):
+        """
+        Retrieve the number of instances of a class.
+        syntax: count <class name>
+        """
+        count = 0  # Define count and initialize to 0
+
+        obj = storage.all()  # Load all objects into memory
+
+        # Iterate through objects
+        for obj_id in obj.keys():
+
+            # Split obj_id into class name and id
+            parts = obj_id.split(".")
+
+            # Get the class name part which is the first item
+            if parts[0] == arg:
+
+                # Increase count everytime an instance is met
+                count += 1
+
+        print(count)  # Print count
 
 
 if __name__ == '__main__':
