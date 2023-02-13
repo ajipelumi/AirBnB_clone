@@ -42,7 +42,9 @@ class TestBaseModelClass(unittest.TestCase):
     def test_save(self):
         """ Test the save method. """
         old_time = self.obj.updated_at
-        self.assertNotEqual(self.obj.save(), old_time)
+        self.obj.save()
+        self.assertNotEqual(self.obj.updated_at, old_time)
+        self.assertNotEqual(self.obj.updated_at, self.obj.created_at)
 
     def test_str(self):
         """ Test string representation. """
