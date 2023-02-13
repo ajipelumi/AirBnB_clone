@@ -34,12 +34,13 @@ class HBNBCommand(cmd.Cmd):
         """
         Handles an alternate syntax <class name>.<command>.
         """
-        # Dictionary to hold commands
+        # Create dictionary to store commands
         commands = {
                 "all": self.do_all,
                 "count": self.do_count,
                 "show": self.do_show,
-                "destroy": self.do_destroy
+                "destroy": self.do_destroy,
+                "update": self.do_update
         }
 
         # Check if the first arg is an uppercase character
