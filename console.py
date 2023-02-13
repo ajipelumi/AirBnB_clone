@@ -37,7 +37,9 @@ class HBNBCommand(cmd.Cmd):
         # Dictionary to hold commands
         commands = {
                 "all": self.do_all,
-                "count": self.do_count
+                "count": self.do_count,
+                "show": self.do_show,
+                "destroy": self.do_destroy
         }
 
         # Check if the first arg is an uppercase character
