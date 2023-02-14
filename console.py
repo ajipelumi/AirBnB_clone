@@ -189,6 +189,7 @@ class HBNBCommand(cmd.Cmd):
             # Check for key_to_delete
             if key_to_delete:
                 del obj[key_to_delete]
+                storage.save()  # Save this change in JSON file as well
                 flag = 1  # Indicates that item has been deleted
 
             # The instance does not exist as key is not found
