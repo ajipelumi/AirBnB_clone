@@ -14,8 +14,7 @@ class FileStorageClass(unittest.TestCase):
         """ Sets up objects and variables. """
         self.file = FileStorage()
         self.model = BaseModel()
-        self.file_path = "test_file.json"
-        self.file._FileStorage__file_path = self.file_path
+        self.file_path = self.file._FileStorage__file_path
 
     def tearDown(self):
         """ Clean up objects and variables. """
