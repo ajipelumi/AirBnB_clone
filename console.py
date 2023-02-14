@@ -48,10 +48,13 @@ class HBNBCommand(cmd.Cmd):
         if arg[0].isupper():
 
             # Replace the characters with space
-            new_arg = re.sub(r'[,\.\(\)\'\"]', " ", arg)
+            new_arg = re.sub(r'[,\(\)\'\"]', " ", arg)
 
-            # Split new_arguments and turn to list
-            new_arg = new_arg.split()
+            # Split the first occurence of dot
+            new_arg = new_arg.split('.', 1)
+
+            # Return a list of all the items after split()
+            new_arg = sum((x.split() for x in new_arg), [])
 
             # Swap the first and second arguments to match required syntax
             new_arg[0], new_arg[1] = new_arg[1], new_arg[0]
