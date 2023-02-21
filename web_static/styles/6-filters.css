@@ -47,7 +47,6 @@
     font-weight: 600;
     padding-left: 30px;
     line-height: 1;
-    margin-bottom: -5px;
 }
 
 .filters h4 {
@@ -77,16 +76,21 @@
     padding: 12px 30px;
 }
 
+.locations:hover .popover,
+.amenities:hover .popover {
+  visibility: visible;
+}
+
 .popover ul {
     list-style-type: none;
     padding: 0px 15px;
     margin-top: -10px;
 }
 
-li {
-    margin-bottom: 5px;
-}
-
 .popover h2 {
     font-size: 16px;
+}
+
+li {
+    margin-bottom: 5px;
 }
